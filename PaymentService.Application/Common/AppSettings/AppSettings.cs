@@ -10,5 +10,8 @@
 		public string RazorPayKeyId { get; set; }
 		public string RazorPayKeySecret { get;	set; }
 
+
+		public string AdminId { get; set; }
+
 	}
 }

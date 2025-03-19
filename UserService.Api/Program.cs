@@ -33,6 +33,8 @@ namespace UserService.Api
 				CloudinaryApiSecrut = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET"),
 			};
 
+			builder.Logging.ClearProviders();
+			builder.Logging.AddConsole();
 
 			builder.Services.AddSingleton(appSettings);	
 

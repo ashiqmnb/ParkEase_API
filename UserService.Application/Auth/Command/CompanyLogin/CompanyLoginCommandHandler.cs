@@ -82,7 +82,7 @@ namespace UserService.Application.Auth.Command.CompanyLogin
 			   {
 				new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
 				new Claim(ClaimTypes.Name, user.Email),
-				new Claim(ClaimTypes.Role,"User")
+				new Claim(ClaimTypes.Role,"Company")
 			};
 
 			var token = new JwtSecurityToken(

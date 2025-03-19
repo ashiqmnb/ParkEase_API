@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using UserService.Application.Common.AppSettings;
 using UserService.Application.Common.Interfaces;
 using UserService.Domain.Repository;
+using UserService.Infrastructure.BackgroundServices;
 using UserService.Infrastructure.Consumer;
 using UserService.Infrastructure.Data;
 using UserService.Infrastructure.Repository;
@@ -22,19 +23,24 @@ namespace UserService.Infrastructure
 				optins.UseNpgsql(appSettings.DbConnectionString);
 			});
 
-			services.AddTransient<IAuthRepo, AuthRepo>();
-			services.AddTransient<IAddressRepo, AddressRepo>();
-			services.AddTransient<IUserRepo, UserRepo>();
-			services.AddTransient<ICompanyRepo, CompanyRepo>();
+			services.AddHostedService<SubscriptionCheckerService>();
 
-			services.AddTransient<IEmailService, EmailService>();
-			services.AddTransient<ICloudinaryService, CloudinaryService>();
+			services.AddScoped<IAuthRepo, AuthRepo>();
+			services.AddScoped<IAddressRepo, AddressRepo>();
+			services.AddScoped<IUserRepo, UserRepo>();
+			services.AddScoped<ICompanyRepo, CompanyRepo>();
+
+			services.AddScoped<IEmailService, EmailService>();
+			services.AddScoped<ICloudinaryService, CloudinaryService>();
+
+
 
 			services.AddMassTransit(busConfigurator =>
 			{
 				busConfigurator.SetDefaultEndpointNameFormatter();
 
 				busConfigurator.AddConsumer<AddCoinEventConsumer>();
+				busConfigurator.AddConsumer<AddSubscriptionEventConsumer>();
 
 				busConfigurator.UsingRabbitMq((context, cfg) =>
 				{

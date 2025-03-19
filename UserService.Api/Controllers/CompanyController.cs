@@ -57,7 +57,7 @@ namespace UserService.Api.Controllers
 					Images = images
 				});
 
-				if (res) return Ok(new ApiResponse<string>(200, "Success", "Images Added Successfully"));
+				if (res) return Ok(new ApiResponse<string>(200, "Success", "Images Added Successfully"));	
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
 			}
 			catch (Exception ex)

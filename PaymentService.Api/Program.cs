@@ -26,6 +26,8 @@ namespace PaymentService.Api
 				
 				RazorPayKeyId = Environment.GetEnvironmentVariable("RAZORPAY_KEYID"),
 				RazorPayKeySecret = Environment.GetEnvironmentVariable("RAZORPAY_KEYSECRET"),
+
+				AdminId = Environment.GetEnvironmentVariable("ADMIN_ID"),
 			};
 
 			builder.Services.AddSingleton(appSettings);

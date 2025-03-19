@@ -1,5 +1,4 @@
-﻿
-using Contracts.PaymentEvents;
+﻿using Contracts.PaymentEvents;
 using MassTransit;
 using MediatR;
 using PaymentService.Application.Common.AppSettings;

@@ -1,5 +1,4 @@
-﻿
-namespace Contracts.PaymentEvents
+﻿namespace Contracts.PaymentEvents
 {
 	public class AddCoinEvent
 	{

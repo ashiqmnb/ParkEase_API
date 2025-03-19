@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PaymentService.Application.Coin.Command.AddSubscription;
 using PaymentService.Application.Coin.Command.ConfirmPayment;
 using PaymentService.Application.Coin.Command.RazorOrderCreate;
 using PaymentService.Application.Common.ApiResponse;
@@ -52,6 +54,29 @@ namespace PaymentService.Api.Controllers
 			{
 				var res = await _mediater.Send(new ConfirmPaymentCommand(paymentDto));
 				if(res) return Ok(new ApiResponse<string>(200, "Success", "Payment confirmed successfully"));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+		[HttpPost("add-subscription")]
+		//[Authorize(Roles = "Company")]
+		public async Task<IActionResult> AddSubscription(int days)
+		{
+			try
+			{
+				var companyId = HttpContext.Items["UserId"].ToString();
+				var res = await _mediater.Send(new AddSubscriptionCommand
+				{
+					CompanyId = companyId,
+					Days = days
+				});
+
+				if (res) return Ok(new ApiResponse<string>(200, "Success", "Subscription added successfully"));
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
 			}
 			catch (Exception ex)

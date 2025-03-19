@@ -16,6 +16,9 @@ namespace PaymentService.Domain.Entity
 		[Required(ErrorMessage = "Coin is required")]
 		public int Coin { get; set; }
 
+		[Required(ErrorMessage = "Description is required")]
+		public string Description { get; set; }
+
 
 		[Required(ErrorMessage = "Status is required")]
 		public TransactionStatus Status { get; set; } = TransactionStatus.Pending;

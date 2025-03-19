@@ -10,6 +10,8 @@
 		public List<string>? Images { get; set; }
 		public int Coins { get; set; }
 		public string? SubscriptionStatus { get; set; }
+		public DateTime? StartDate { get; set; }
+		public DateTime? EndDate { get; set; }
 		public string? Type { get; set; }
 		public bool IsBlocked { get; set; }
 		public Guid? AddressId { get; set; }

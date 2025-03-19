@@ -34,6 +34,8 @@ namespace UserService.Application.Companies.Query
 					Images = company.Images,
 					Coins = company.Coins,
 					SubscriptionStatus = company.SubscriptionStatus.ToString(),
+					StartDate = company.SubscriptionStartDate,
+					EndDate = company.SubscriptionExpiryDate,
 					Type = company.Type.ToString(),
 					IsBlocked = company.IsBlocked,
 					AddressId = company.AddressId,
