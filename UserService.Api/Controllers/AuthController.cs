@@ -40,7 +40,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 			
 		}
@@ -57,7 +57,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -105,7 +105,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -121,7 +121,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -137,7 +137,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -153,7 +153,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -169,7 +169,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -185,7 +185,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 
@@ -201,7 +201,7 @@ namespace UserService.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest(new ApiResponse<string>(400, "Failed", null, ex.Message));
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
 	}

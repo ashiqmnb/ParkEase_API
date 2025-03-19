@@ -1,6 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UserService.Domain.Entity
 {
@@ -20,7 +18,7 @@ namespace UserService.Domain.Entity
 		public string? Place { get; set; }
 
 		[Required(ErrorMessage = "Postalcode is Required")]
-		public int Postal_code { get; set; }
+		public int PostalCode { get; set; }
 
 		[Required(ErrorMessage = "State is Required")]
 		public string? State { get; set; }

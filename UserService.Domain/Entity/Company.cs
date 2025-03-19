@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UserService.Domain.Entity
 {
@@ -12,7 +7,7 @@ namespace UserService.Domain.Entity
 		public Guid Id { get; set; }
 
 		[Required(ErrorMessage = "Name is Required")]
-		[StringLength(20, ErrorMessage = "Name cannot exceed 20 characters.")]
+		[StringLength(25, ErrorMessage = "Name cannot exceed 25 characters.")]
 		public string Name { get; set; }
 
 		[Required(ErrorMessage = "Email is required.")]
@@ -41,6 +36,12 @@ namespace UserService.Domain.Entity
 		public Type Type { get; set; }
 
 		public bool IsBlocked { get; set; } = false;
+
+
+		// to manage subscriptions
+		public DateTime? SubscriptionStartDate { get; set; }
+		public DateTime? SubscriptionExpiryDate { get; set; }
+		public int? SubscriptionDurationInDays { get; set; }
 
 
 		public Guid? AddressId { get; set; }

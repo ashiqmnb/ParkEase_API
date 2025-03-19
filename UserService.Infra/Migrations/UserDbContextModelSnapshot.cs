@@ -53,7 +53,7 @@ namespace UserService.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Postal_code")
+                    b.Property<int>("PostalCode")
                         .HasColumnType("integer");
 
                     b.Property<string>("State")
@@ -146,8 +146,8 @@ namespace UserService.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -158,6 +158,15 @@ namespace UserService.Infrastructure.Migrations
 
                     b.Property<string>("Profile")
                         .HasColumnType("text");
+
+                    b.Property<int?>("SubscriptionDurationInDays")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("SubscriptionExpiryDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("SubscriptionStartDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("SubscriptionStatus")
                         .HasColumnType("integer");

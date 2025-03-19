@@ -27,7 +27,12 @@ namespace UserService.Api
 				EmailPort = int.Parse(Environment.GetEnvironmentVariable("EMAIL_PORT")),
 				EmailUsername = Environment.GetEnvironmentVariable("EMAIL_USERNAME"),
 				EmailPassword = Environment.GetEnvironmentVariable("EMAIL_PASSWORD"),
+
+				CloudinaryCloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
+				CloudinaryApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
+				CloudinaryApiSecrut = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET"),
 			};
+
 
 			builder.Services.AddSingleton(appSettings);	
 
