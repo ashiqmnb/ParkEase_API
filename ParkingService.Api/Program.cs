@@ -3,6 +3,7 @@ using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ParkingService.Api.Middlewares;
 using ParkingService.Application;
 using ParkingService.Application.Common.AppSettings;
 using ParkingService.Infrastructure;
@@ -104,9 +105,10 @@ namespace ParkingService.Api
 			{
 				options.AddPolicy("ReactPolicy", builder =>
 				{
-					builder.AllowAnyOrigin()
-						   .AllowAnyMethod()
-						   .AllowAnyHeader();
+					builder.WithOrigins("http://localhost:5173", "http://localhost:5174", "http://localhost:5175")
+						.AllowAnyHeader()
+						.AllowAnyMethod()
+						.AllowCredentials();
 				});
 			});
 
@@ -119,9 +121,14 @@ namespace ParkingService.Api
 				app.UseSwaggerUI();
 			}
 
+			app.UseCors("ReactPolicy");
+
 			app.UseHttpsRedirection();
 
 			app.UseAuthorization();
+			app.UseAuthorization();
+
+			app.UseMiddleware<UserIdMiddlware>();
 
 
 			app.MapControllers();

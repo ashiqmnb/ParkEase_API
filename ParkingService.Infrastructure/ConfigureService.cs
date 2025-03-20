@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ParkingService.Application.Common.AppSettings;
+using ParkingService.Domain.Repository;
 using ParkingService.Infrastructure.Data;
+using ParkingService.Infrastructure.Repository;
 
 namespace ParkingService.Infrastructure
 {
@@ -17,6 +19,8 @@ namespace ParkingService.Infrastructure
 				optins.UseNpgsql(appSettings.DbConnectionString);
 			});
 
+
+			services.AddScoped<ISlotRepo, SlotRepo>();
 
 
 

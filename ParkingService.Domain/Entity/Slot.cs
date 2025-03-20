@@ -21,9 +21,7 @@ namespace ParkingService.Domain.Entity
 		public string? UserId { get; set; }
 		public string? VehicleNumber { get; set; }
 
-
 		public ICollection<History> Histories { get; set; } = new List<History>();
-
 	}
 
 	public enum SlotStatus
