@@ -6,8 +6,11 @@ using UserService.Application.Common.ApiResponse;
 using UserService.Application.Common.DTOs.Auth;
 using UserService.Application.Common.DTOs.Company;
 using UserService.Application.Companies.Command.AddImages;
+using UserService.Application.Companies.Command.BlockUnblock;
 using UserService.Application.Companies.Command.UpdateProfile;
 using UserService.Application.Companies.Query;
+using UserService.Application.Companies.Query.GetCompaniesForAdmin;
+using UserService.Application.Companies.Query.GetCompaniesForUser;
 
 namespace UserService.Api.Controllers
 {
@@ -83,6 +86,52 @@ namespace UserService.Api.Controllers
 				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
-		
+
+		[HttpGet("admin")]
+		public async Task<IActionResult> GetCompaniesForAdmin([FromQuery] CompanyQueryParamsForAdmin queryParams)
+		{
+			try
+			{
+				var companies = await _mediater.Send(new GetCompaniesForAdminQuery(queryParams));
+				if(companies != null) return Ok(new ApiResponse<CompanyPageResAdminDTO>(200, "Success", companies));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+		[HttpGet("user")]
+		public async Task<IActionResult> GetCompaniesForUser([FromQuery] CompanyQueryParamsForUser queryParams)
+		{
+			try
+			{
+				var companies = await _mediater.Send(new GetCompaniesForUserQuery(queryParams));
+				if (companies != null) return Ok(new ApiResponse<CompanyPageResUserDTO>(200, "Success", companies));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+		[HttpPatch("blockUnblock/{companyId}")]
+		//[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> BlockUnblock(string companyId)
+		{
+			try
+			{
+				var res = await _mediater.Send(new BlockUnblockCommand { CompanyId = companyId });
+				if(res != null) return Ok(new ApiResponse<string>(200, "Success", res));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
 	}
 }

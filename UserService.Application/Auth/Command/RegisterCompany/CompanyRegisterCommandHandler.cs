@@ -27,9 +27,9 @@ namespace UserService.Application.Auth.Command.RegisterCompany
 				string salt = BCrypt.Net.BCrypt.GenerateSalt();
 				string hashPassword = BCrypt.Net.BCrypt.HashPassword(request.companyRegDto.Password, salt);
 				
-				if(request.companyRegDto.Type != "Customer" && request.companyRegDto.Type != "Public")
+				if(request.companyRegDto.Type.ToLower() != "customer" && request.companyRegDto.Type.ToLower() != "public")
 				{
-					throw new Exception("Invalid comapny type");
+					throw new Exception("Invalid company type");
 				}
 
 				var companyType = UserService.Domain.Entity.Type.Public;

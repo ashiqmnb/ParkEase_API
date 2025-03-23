@@ -6,7 +6,7 @@ namespace UserService.Application.Common.DTOs.Auth
 	public class CompanyRegDTO
 	{
 		[Required(ErrorMessage = "Name is Required")]
-		[StringLength(20, ErrorMessage = "Name cannot exceed 20 characters.")]
+		[StringLength(25, ErrorMessage = "Name cannot exceed 25 characters.")]
 		public string Name { get; set; }
 
 		[Required(ErrorMessage = "Email is required.")]
