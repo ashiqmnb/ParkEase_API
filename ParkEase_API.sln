@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{FDE30D41-3117-4201-8371-D5B27DD208B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService", "{6A64DD1F-DCDA-4BB8-8A72-997A8FEE6B58}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Api", "UserService.Api\UserService.Api.csproj", "{06732BBB-938D-4208-ABC1-BBE40447CF78}"
 EndProject

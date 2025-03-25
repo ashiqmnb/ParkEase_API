@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserService.Application.Auth.Command.AdminLogin;
 using UserService.Application.Auth.Command.ComapnyForgotPw;
+using UserService.Application.Auth.Command.CompanyChangePw;
 using UserService.Application.Auth.Command.CompanyLogin;
 using UserService.Application.Auth.Command.CompanyResetPw;
 using UserService.Application.Auth.Command.RegisterCompany;
@@ -198,6 +200,26 @@ namespace UserService.Api.Controllers
 				var res = await _mediater.Send(new CompanyResetPwCommand(companyResetPwDto));
 				if (res) return Ok(new ApiResponse<string>(200, "Success", "Password reset completed"));
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+		[HttpPatch("company/change-password")]
+		[Authorize(Roles = "Company")]
+		public async Task<IActionResult> CompanyChangePw([FromBody]ChangePwDTO changePwDto)
+		{
+			try
+			{
+				string companyId = HttpContext.Items["UserId"].ToString();
+				var res = await _mediater.Send(new CompanyChangePwCommand(changePwDto, companyId));
+				if (res) return Ok(new ApiResponse<string>(200, "Success", "Password changed successfull"));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+
+				//return Ok(companyId);
 			}
 			catch (Exception ex)
 			{
