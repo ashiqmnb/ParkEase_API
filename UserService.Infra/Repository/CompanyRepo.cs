@@ -16,6 +16,19 @@ namespace UserService.Infrastructure.Repository
 			_userDbContext = userDbContext;
 		}
 
+		public async Task<List<Company>> GetAllCompanies()
+		{
+			try
+			{
+				var companies = await _userDbContext.Companies.ToListAsync();
+				return companies;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
 		public async Task<List<Company>> GetAllCompaniesForAdmin()
 		{
 			try

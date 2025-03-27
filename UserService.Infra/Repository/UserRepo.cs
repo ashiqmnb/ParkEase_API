@@ -14,6 +14,19 @@ namespace UserService.Infrastructure.Repository
 			_userDbContext = userDbContext;
 		}
 
+		public async Task<List<User>> GetAllUsers()
+		{
+			try
+			{
+				var users = await _userDbContext.Users.ToListAsync();
+				return users;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
 		public async Task<User> GetUserById(string userId)
 		{
 			try
@@ -27,5 +40,19 @@ namespace UserService.Infrastructure.Repository
 				throw new Exception(ex.InnerException?.Message ?? ex.Message);
 			}
 		}
+
+		public async Task<List<Admin>> GetAllAdmins()
+		{
+			try
+			{
+				var admins = await _userDbContext.Admins.ToListAsync();
+				return admins;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
 	}
 }

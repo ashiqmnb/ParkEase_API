@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PaymentService.Application.Coin.Command.AddSubscription;
 using PaymentService.Application.Coin.Command.ConfirmPayment;
 using PaymentService.Application.Coin.Command.RazorOrderCreate;
+using PaymentService.Application.Coin.Command.ReserveSlot;
 using PaymentService.Application.Common.ApiResponse;
 using PaymentService.Application.Common.DTOs;
 using Razorpay.Api;
@@ -77,6 +78,26 @@ namespace PaymentService.Api.Controllers
 				});
 
 				if (res) return Ok(new ApiResponse<string>(200, "Success", "Subscription added successfully"));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+		[HttpPost("reserve-slot")]
+		//[Authorize(Roles = "User")]
+		public async Task<IActionResult> ReserveSlot([FromBody] ReserveSlotDTO reserveSlotDto)
+		{
+			try
+			{
+
+				var userId = HttpContext.Items["UserId"].ToString();
+
+				var res = await _mediater.Send(new ReserveSlotCommand(userId, reserveSlotDto));
+
+				if (res) return Ok(new ApiResponse<string>(200, "Success", "Slot reserved successfully"));
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
 			}
 			catch (Exception ex)

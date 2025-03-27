@@ -41,6 +41,7 @@ namespace UserService.Infrastructure
 
 				busConfigurator.AddConsumer<AddCoinEventConsumer>();
 				busConfigurator.AddConsumer<AddSubscriptionEventConsumer>();
+				busConfigurator.AddConsumer<AddReservationEventConsumer>();
 
 				busConfigurator.UsingRabbitMq((context, cfg) =>
 				{

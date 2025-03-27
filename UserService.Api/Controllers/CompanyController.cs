@@ -26,7 +26,7 @@ namespace UserService.Api.Controllers
 		}
 
 
-		[Authorize]
+		//[Authorize]
 		[HttpGet]
 		public async Task<IActionResult> GetCompanyById([FromQuery] string? companyId)
 		{

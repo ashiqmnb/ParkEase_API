@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ParkingService.Application.Common.AppSettings;
 using ParkingService.Domain.Repository;
+using ParkingService.Infrastructure.Consumer;
 using ParkingService.Infrastructure.Data;
 using ParkingService.Infrastructure.Repository;
 
@@ -21,6 +22,7 @@ namespace ParkingService.Infrastructure
 
 
 			services.AddScoped<ISlotRepo, SlotRepo>();
+			services.AddScoped<IHistoryRepo, HistoryRepo>();
 
 
 
@@ -28,6 +30,8 @@ namespace ParkingService.Infrastructure
 			services.AddMassTransit(busConfigurator =>
 			{
 				busConfigurator.SetDefaultEndpointNameFormatter();
+
+				busConfigurator.AddConsumer<UpdateSlotEventConsumer>();
 
 
 				busConfigurator.UsingRabbitMq((context, cfg) =>

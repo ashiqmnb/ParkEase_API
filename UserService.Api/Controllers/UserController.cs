@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserService.Application.Common.ApiResponse;
+using UserService.Application.Common.DTOs.User;
+using UserService.Application.Users.Query.GetUsers;
 
 namespace UserService.Api.Controllers
 {
@@ -18,24 +20,25 @@ namespace UserService.Api.Controllers
 		}
 
 
-		//[Authorize]
-		//[HttpGet]
-		//public async Task<IActionResult> GetUserById([FromQuery] string? userId)
-		//{
-		//	try
-		//	{
-		//		if(userId == null)
-		//		{
-		//			userId = HttpContext.Items["UserId"]?.ToString();
-		//		}
 
-		//		return Ok(userId);
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
-		//	}
-		//}
+		[HttpGet]
+		public async Task<IActionResult> GetUsers([FromQuery]UserQueryParams queryParams)
+		{
+			try
+			{
+				var users = await _mediater.Send(new GetUsersQuery
+				{
+					QueryParams = queryParams
+				});
+
+				if(users != null) return Ok(new ApiResponse<UserPageResDTO>(200, "Success", users));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
 
 	}
 }

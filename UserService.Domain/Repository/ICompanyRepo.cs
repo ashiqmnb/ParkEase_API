@@ -8,5 +8,6 @@ namespace UserService.Domain.Repository
 		Task<List<Company>> GetAllCompaniesForUser();
 		Task<Company> GetCompanyById(string companyId);
 		Task<int> SaveChangesAsyncCustom();
+		Task<List<Company>> GetAllCompanies();
 	}
 }

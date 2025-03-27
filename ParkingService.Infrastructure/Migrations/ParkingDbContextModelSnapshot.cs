@@ -31,7 +31,7 @@ namespace ParkingService.Infrastructure.Migrations
                     b.Property<DateTime>("CheckIn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("CheckOut")
+                    b.Property<DateTime?>("CheckOut")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CompanyId")
@@ -50,6 +50,10 @@ namespace ParkingService.Infrastructure.Migrations
 
                     b.Property<Guid>("SlotId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("SlotName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text");
@@ -89,6 +93,9 @@ namespace ParkingService.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("CurrentHistoryId")
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -109,6 +116,9 @@ namespace ParkingService.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("text");
 
                     b.Property<string>("VehicleNumber")

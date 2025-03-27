@@ -13,14 +13,16 @@ namespace ParkingService.Domain.Entity
 		public string CompanyId { get; set; }
 
 		[Required(ErrorMessage = "Status is required")]
-		public SlotStatus Status { get; set; } = SlotStatus.Available;
+		public SlotStatus Status { get; set; } =	SlotStatus.Available;
 
 		[Required(ErrorMessage = "Type is required")]
 		public SlotType Type { get; set; }
 
+
+		public string? UserName {  get; set; }
 		public string? UserId { get; set; }
 		public string? VehicleNumber { get; set; }
-
+		public string? CurrentHistoryId { get; set; }
 		public ICollection<History> Histories { get; set; } = new List<History>();
 	}
 

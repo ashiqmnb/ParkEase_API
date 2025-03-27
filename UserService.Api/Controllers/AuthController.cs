@@ -216,10 +216,8 @@ namespace UserService.Api.Controllers
 			{
 				string companyId = HttpContext.Items["UserId"].ToString();
 				var res = await _mediater.Send(new CompanyChangePwCommand(changePwDto, companyId));
-				if (res) return Ok(new ApiResponse<string>(200, "Success", "Password changed successfull"));
+				if (res) return Ok(new ApiResponse<string>(200, "Success", "Password changed successfully"));
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
-
-				//return Ok(companyId);
 			}
 			catch (Exception ex)
 			{

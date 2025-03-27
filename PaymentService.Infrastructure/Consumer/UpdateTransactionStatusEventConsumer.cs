@@ -1,4 +1,4 @@
-﻿using Contracts.PaymentEvents;
+﻿ using Contracts.PaymentEvents;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using PaymentService.Domain.Entity;

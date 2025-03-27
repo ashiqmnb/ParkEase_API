@@ -56,5 +56,8 @@ namespace UserService.Api.Controllers
 				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
 			}
 		}
+
+
+		
 	}
 }

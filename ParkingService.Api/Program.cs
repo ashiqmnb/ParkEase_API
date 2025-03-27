@@ -125,7 +125,7 @@ namespace ParkingService.Api
 
 			app.UseHttpsRedirection();
 
-			app.UseAuthorization();
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseMiddleware<UserIdMiddlware>();

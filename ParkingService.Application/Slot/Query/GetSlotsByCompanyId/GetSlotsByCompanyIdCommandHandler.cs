@@ -19,7 +19,19 @@ namespace ParkingService.Application.Slot.Query.GetSlotsByCompanyId
 			try
 			{
 				var companySlots = await _slotRepo.GetSlotsByCompanyId(request.CompanyId);
-				if (companySlots.Count < 1) throw new Exception("No listed slots");
+				if (!companySlots.Any())
+				{
+					return new SlotResDetailsDTO
+					{
+						Total = 0,
+						TwoWheeler = 0,
+						FourWheeler = 0,
+						Available = 0,
+						Reserved = 0,
+						Parked = 0,
+						Slots = new List<SlotResDTO>()
+					};
+				}
 
 				var res = new SlotResDetailsDTO
 				{
