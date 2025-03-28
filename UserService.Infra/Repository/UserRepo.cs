@@ -54,5 +54,16 @@ namespace UserService.Infrastructure.Repository
 			}
 		}
 
+		public async Task<int> SaveChangesAsyncCustom()
+		{
+			try
+			{
+				return await _userDbContext.SaveChangesAsync();
+			}
+			catch( Exception ex )
+			{
+				throw new Exception(ex.InnerException.Message ?? ex.Message);
+			}
+		}
 	}
 }

@@ -11,6 +11,7 @@ using UserService.Application.Companies.Command.UpdateProfile;
 using UserService.Application.Companies.Query;
 using UserService.Application.Companies.Query.GetCompaniesForAdmin;
 using UserService.Application.Companies.Query.GetCompaniesForUser;
+using UserService.Application.Companies.Query.GetCompanyById;
 
 namespace UserService.Api.Controllers
 {
@@ -119,7 +120,7 @@ namespace UserService.Api.Controllers
 
 
 		[HttpPatch("blockUnblock/{companyId}")]
-		//[Authorize(Roles = "Admin")]
+		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> BlockUnblock(string companyId)
 		{
 			try

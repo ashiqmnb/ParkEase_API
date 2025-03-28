@@ -7,5 +7,6 @@ namespace UserService.Domain.Repository
 		Task<User> GetUserById(string userId);
 		Task<List<User>> GetAllUsers();
 		Task<List<Admin>> GetAllAdmins();
+		Task<int> SaveChangesAsyncCustom();
 	}
 }
