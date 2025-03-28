@@ -41,7 +41,7 @@ namespace PaymentService.Application.Coin.Command.AddSubscription
 
 
 				Guid transactionId = Guid.NewGuid();
-				var transaction = new Transaction
+				var transaction = new Domain.Entity.Transaction
 				{
 					Id = transactionId,
 					SenderId = Guid.Parse(request.CompanyId),

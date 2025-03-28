@@ -6,5 +6,6 @@ namespace PaymentService.Domain.Repository
 	{
 		Task<int>AddTransaction (Transaction transaction);
 		Task<int> SaveChangesAsyncCustom();
+		Task<List<Transaction>> GetTransactionByCompanyId(string companyId);
 	}
 }

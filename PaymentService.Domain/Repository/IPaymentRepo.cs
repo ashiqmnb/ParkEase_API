@@ -7,5 +7,6 @@ namespace PaymentService.Domain.Repository
 		Task<int> AddPayment(Payment payment);
 		Task<Payment> GetPaymentByTransId(string transId);
 		Task<int> SaveChangesAsyncCustom();
+		Task<List<Payment>> GetAllPayments();
 	}
 }

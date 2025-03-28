@@ -27,6 +27,23 @@ namespace PaymentService.Infrastructure.Repository
 			}
 		}
 
+		public async Task<List<Payment>> GetAllPayments()
+		{
+			try
+			{
+				var payments = await _paymentDbContext.Payments
+					.Where(p => p.IsDeleted == false)
+					.OrderByDescending(p => p.CreatedOn)
+					.ToListAsync();
+
+				return payments;
+			}
+			catch(Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
 		public async Task<Payment> GetPaymentByTransId(string transId)
 		{
 			try
