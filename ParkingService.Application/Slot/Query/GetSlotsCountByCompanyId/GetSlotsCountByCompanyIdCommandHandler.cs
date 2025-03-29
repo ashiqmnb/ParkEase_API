@@ -27,7 +27,10 @@ namespace ParkingService.Application.Slot.Query.GetSlotsCountByCompanyId
 				{
 					Total = slots.Count(),
 					TwoWheeler = slots.Where(s => s.Type == Domain.Entity.SlotType.TwoWheeler).Count(),
-					FourWheeler = slots.Where(s => s.Type == Domain.Entity.SlotType.FourWheeler).Count()
+					FourWheeler = slots.Where(s => s.Type == Domain.Entity.SlotType.FourWheeler).Count(),
+					Available = slots.Where(s => s.Status == Domain.Entity.SlotStatus.Available).Count(),
+					Parked = slots.Where(s => s.Status == Domain.Entity.SlotStatus.Parked).Count(),
+					Reserved = slots.Where(s => s.Status == Domain.Entity.SlotStatus.Reserved).Count(),
 				};
 
 				return res;

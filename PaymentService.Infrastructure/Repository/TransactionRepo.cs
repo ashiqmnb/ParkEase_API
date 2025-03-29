@@ -23,7 +23,24 @@ namespace PaymentService.Infrastructure.Repository
 			}
 			catch (Exception ex)
 			{
-				throw new Exception(ex.InnerException.Message ?? ex.Message);
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
+		public async Task<List<Transaction>> GetAllTransactions()
+		{
+			try
+			{
+				var transactions = await _paymentDbContext.Transactions
+					.Where(t => t.IsDeleted == false)
+					.OrderByDescending(t => t.CreatedOn)
+					.ToListAsync();
+
+				return transactions;
+			}
+			catch(Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
 			}
 		}
 
@@ -35,9 +52,26 @@ namespace PaymentService.Infrastructure.Repository
 					.Where(t => t.ReceiverId.ToString() == companyId)
 					.OrderByDescending(p => p.CreatedOn)
 					.ToListAsync();
+
 				return trnsactions;
 			}
 			catch(Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
+		public async Task<List<Transaction>> GetTransMadeByCompanyId(string companyId)
+		{
+			try
+			{
+				var transactions = await _paymentDbContext.Transactions
+					.Where(t => t.SenderId.ToString() == companyId && t.IsDeleted == false)
+					.ToListAsync();
+
+				return transactions;
+			}
+			catch (Exception ex)
 			{
 				throw new Exception(ex.InnerException?.Message ?? ex.Message);
 			}

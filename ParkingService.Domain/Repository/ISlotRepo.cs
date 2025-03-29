@@ -11,6 +11,6 @@ namespace ParkingService.Domain.Repository
 		Task<Slot> GetSlotByUserIdAndSlotId(string userId, string slotId);
 		Task<Slot> GetSlotByUserIdAndSlotIdAndHistoryId(string userId, string slotId, string historyId);
 		Task<List<Slot>> GetSlotByUserId(string userId);
-
+		Task<List<Slot>> GetAllSlots();
 	}
 }

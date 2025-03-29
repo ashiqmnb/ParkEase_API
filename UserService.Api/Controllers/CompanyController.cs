@@ -12,6 +12,8 @@ using UserService.Application.Companies.Query;
 using UserService.Application.Companies.Query.GetCompaniesForAdmin;
 using UserService.Application.Companies.Query.GetCompaniesForUser;
 using UserService.Application.Companies.Query.GetCompanyById;
+using UserService.Application.Companies.Query.GetRecentListed;
+using UserService.Application.Companies.Query.SubscriptionSummary;
 
 namespace UserService.Api.Controllers
 {
@@ -127,6 +129,40 @@ namespace UserService.Api.Controllers
 			{
 				var res = await _mediater.Send(new BlockUnblockCommand { CompanyId = companyId });
 				if(res != null) return Ok(new ApiResponse<string>(200, "Success", res));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+		[HttpGet("recent-listed")]
+		public async Task<IActionResult> GetRecentListed()
+		{
+			try
+			{
+				var companies = await _mediater.Send(new GetRecentListedQuery());
+				if (companies != null) return Ok(new ApiResponse<List<CompanyResForUserDTO>>(200, "Success", companies));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+
+		[HttpGet("subscription-summary")]
+		public async Task<IActionResult> SubscriptionSummary()
+		{
+			try
+			{
+				var companyId = HttpContext.Items["UserId"]?.ToString();
+				var res = await _mediater.Send(new SubscriptionSummaryQuery { CompanyId = companyId}); 
+				if (res != null) return Ok(new ApiResponse<SubscriptionSummaryDTO>(200, "Success", res));
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
 			}
 			catch (Exception ex)

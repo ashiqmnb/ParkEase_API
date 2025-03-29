@@ -112,5 +112,18 @@ namespace ParkingService.Infrastructure.Repository
 				throw new Exception(ex.InnerException?.Message ?? ex.Message);
 			}
 		}
+
+		public async Task<List<Slot>> GetAllSlots()
+		{
+			try
+			{
+				var slots = await _parkingDbContext.Slots.ToListAsync();
+				return slots;
+			}
+			catch(Exception ex)
+			{
+				throw new Exception(ex.InnerException.Message ?? ex.Message);
+			}
+		}
 	}
 }

@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NpgsqlTypes;
+using System.Diagnostics;
 using UserService.Application.Common.ApiResponse;
 using UserService.Application.Common.DTOs.User;
 using UserService.Application.Users.Command.BlockUnblock;
 using UserService.Application.Users.Command.UpdateProfile;
+using UserService.Application.Users.Query.ActiveUsersCompanies;
 using UserService.Application.Users.Query.GetUserById;
 using UserService.Application.Users.Query.GetUsers;
 
@@ -94,6 +96,22 @@ namespace UserService.Api.Controllers
 				string userId = HttpContext.Items["UserId"]?.ToString();
 				var res = await _mediater.Send(new UpdateProfileCommand(updateProfileDto, userId));
 				if (res) return Ok(new ApiResponse<string>(200, "Success", "Profile Updated Successfully"));
+				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+		[HttpGet("active-users-companies")]
+		public async Task<IActionResult> ActiveUsersCompanies()
+		{
+			try
+			{
+				var res = await _mediater.Send(new ActiveUsersCompaniesQuery());
+				if (res != null) return Ok(new ApiResponse<ActiveUsersCompaniesDTO>(200, "Success", res));
 				return BadRequest(new ApiResponse<string>(400, "Failed", null, "Something went wrong"));
 			}
 			catch (Exception ex)

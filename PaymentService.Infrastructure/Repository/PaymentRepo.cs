@@ -58,6 +58,22 @@ namespace PaymentService.Infrastructure.Repository
 			}
 		}
 
+		public async Task<List<Payment>> GetPaymentsMadeByCompanyId(string companyId)
+		{
+			try
+			{
+				var payments = await _paymentDbContext.Payments
+					.Where(p => p.CustomerId.ToString() == companyId && p.IsDeleted == false)
+					.ToListAsync();
+
+				return payments;
+			}
+			catch(Exception ex)
+			{
+				throw new Exception(ex.InnerException?.Message ?? ex.Message);
+			}
+		}
+
 		public async Task<int> SaveChangesAsyncCustom()
 		{
 			try

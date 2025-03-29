@@ -11,6 +11,7 @@ using ParkingService.Application.Slot.Command.CheckOutSlot;
 using ParkingService.Application.Slot.Query.GetReservationsParkings;
 using ParkingService.Application.Slot.Query.GetSlotsByCompanyId;
 using ParkingService.Application.Slot.Query.GetSlotsCountByCompanyId;
+using ParkingService.Application.Slot.Query.GetTotalSlots;
 
 namespace ParkingService.Api.Controllers
 {
@@ -77,7 +78,7 @@ namespace ParkingService.Api.Controllers
 					companyId = HttpContext.Items["UserId"]?.ToString();
 				}
 
-				var res = await _mediater.Send(new GetSlotsCountByCompanyIdCommand { CompanyId = companyId });
+				var res = await _mediater.Send(new GetSlotsCountByCompanyIdCommand{ CompanyId = companyId });
 				if (res != null) return Ok(new ApiResponse<SlotsCountResDTO>(200, "Success", res));
 				return BadRequest(new ApiResponse<string>(400, "Failed", "Something went wrong"));
 			}
@@ -135,6 +136,22 @@ namespace ParkingService.Api.Controllers
 				var userId = HttpContext.Items["UserId"]?.ToString();
 				var res = await _mediater.Send(new GetReservationsParkingsCommand { UserId = userId });
 				if(res != null) return Ok(new ApiResponse<ReservParkResDTO>(200, "Success", res));
+				return BadRequest(new ApiResponse<string>(400, "Failed", "Something went wrong"));
+			}
+			catch (Exception ex)
+			{
+				return StatusCode(500, new ApiResponse<string>(500, "Failed", null, ex.Message));
+			}
+		}
+
+
+		[HttpGet("total-slots")]
+		public async Task<IActionResult> GetTotalSlots()
+		{
+			try
+			{
+				var slots = await _mediater.Send(new GetTotalSlotsQuery());
+				if(slots != null) return Ok(new ApiResponse<int>(200, "Succss", slots));
 				return BadRequest(new ApiResponse<string>(400, "Failed", "Something went wrong"));
 			}
 			catch (Exception ex)

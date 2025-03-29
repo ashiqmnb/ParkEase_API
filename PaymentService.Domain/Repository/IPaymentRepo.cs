@@ -8,5 +8,6 @@ namespace PaymentService.Domain.Repository
 		Task<Payment> GetPaymentByTransId(string transId);
 		Task<int> SaveChangesAsyncCustom();
 		Task<List<Payment>> GetAllPayments();
+		Task<List<Payment>> GetPaymentsMadeByCompanyId(string companyId);
 	}
 }
